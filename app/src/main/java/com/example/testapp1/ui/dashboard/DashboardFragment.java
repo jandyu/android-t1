@@ -1,12 +1,15 @@
 package com.example.testapp1.ui.dashboard;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,10 +32,15 @@ public class DashboardFragment extends Fragment implements AudioRecorder.OnRecor
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode==1){
+        if(requestCode==1001){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //PermissionUtil.goActivity(this, CameraInfoActivity.class);
+            } else {
+                Toast.makeText(getActivity(), "需要允许麦克风权限才能录音", Toast.LENGTH_SHORT).show();
 
+            }
         }
     }
 
